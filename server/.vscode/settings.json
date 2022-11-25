@@ -1,7 +1,10 @@
 {
     "cSpell.words": [
         "adduser",
+        "addusertodb",
+        "DBERR",
         "mydb",
+        "mymethods",
         "testfield",
         "testvalue",
         "urlmongo"

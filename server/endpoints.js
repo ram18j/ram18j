@@ -6,8 +6,8 @@ const port = 5000;
 const helmet = require('helmet');
 
 
-var methods = require ('./methods');
-app.use('/', methods)
+var mymethods_new = require ('./mymethods_new');
+app.use('/', mymethods_new)
 
 
 app.use(bodyParser.json());
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 //pre-flight requests
 app.options('*', function(req, res) {
-	res.send(200);
+	res.sendStatus(200);
 });
 
 server.listen(port, (err) => {

@@ -55,6 +55,29 @@ class HerzUserSignUp extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    InsertUser() {
+
+        let DataBody = {
+            'EmailId': this.state.UsrEmailId,
+            'PhoneNumber': this.state.UsrPhoneNumber,
+            'Password': this.state.UsrPassword
+        }
+
+        fetch('http://localhost:5000/adduserToDb', {
+            method: 'POST',
+            body: JSON.stringify(DataBody),
+            headers: { 'Content-Type': 'application/json' },
+        }) 
+        .then ((response) => response.text())
+        .then ((response) => console.log("Status: " + response)) 
+
+    }
+
+    ValidateFormData() {
+
+      return true;
+    }
+
     handleInput(event) {
         const name = event.target.name;
         const newState = {};
@@ -64,23 +87,11 @@ class HerzUserSignUp extends Component {
     }
 
     handleSubmit(event) {
-      event.preventDefault();
-      console.log(event.target.UsrEmailId.value);
-      console.log(event.target.UsrPhoneNumber.value);
-      console.log(event.target.UsrPassword.value);
-      console.log(event.target.UsrRePassword.value);
-
-      let DataBody = {"name":event.target.UsrEmailId.value}
-
-      const res = fetch('http://localhost:5000/adduser', {
-            method: 'POST',
-            body: JSON.stringify(DataBody),
-            headers: { 'Content-Type': 'application/json' },
-        })
-        .then (data => res.json);
-        return console.data;
-    }
-
+      event.preventDefault();    
+          
+      this.InsertUser();        
+    }   
+    
     RenderForm() {
     return (
         
@@ -94,22 +105,51 @@ class HerzUserSignUp extends Component {
             <div className="row" style={RowStyle}>    
                 <div className="column">             
                     <label><h5>Email</h5>
-                        <input style={InputTextBox} type="email" id="UsrEmailId" name="UsrEmailId" placeholder="Ex: abc@xyz.ext" value={this.state.UsrEmailId} onChange={this.handleInput} />
-                    </label>                    
+                        <input style={InputTextBox} 
+                        type="email" 
+                        id="UsrEmailId" 
+                        name="UsrEmailId" 
+                        placeholder="Ex: abc@xyz.ext" 
+                        value={this.state.UsrEmailId} 
+                        onChange={this.handleInput} />
+                    </label>
+                    <span style={{ color: "red" }}>{this.state.errors['UsrEmailId']}</span>
+
                     <label><h5>Phone</h5>
-                        <input style={InputTextBox} type="phone" id="UsrPhoneNumber" name="UsrPhoneNumber" placeholder="10 Digit Mobile Number" value={this.state.UsrPhoneNumber} onChange={this.handleInput} />
+                        <input style={InputTextBox} 
+                        type="phone" 
+                        id="UsrPhoneNumber" 
+                        name="UsrPhoneNumber" 
+                        placeholder="10 Digit Mobile Number" 
+                        value={this.state.UsrPhoneNumber} 
+                        onChange={this.handleInput} />
                     </label>      
+                    <span style={{ color: "red" }}>{this.state.errors['UsrPhoneNumber']}</span>
                 </div>                    
             </div>
 
             <div className="row" style={RowStyle}>    
                 <div className="column">             
                     <label><h5>Password</h5>
-                        <input style={InputTextBox} type="password" autoComplete="on" id="UsrPassword" name="UsrPassword" placeholder="Password" value={this.state.UsrPassword} onChange={this.handleInput} />
-                    </label>                       
+                        <input style={InputTextBox} 
+                        type="password" autoComplete="on" 
+                        id="UsrPassword" name="UsrPassword" 
+                        placeholder="Password" value={this.state.UsrPassword} 
+                        onChange={this.handleInput} />
+                    </label>          
+                    <span style={{ color: "red" }}>{this.state.errors['UsrPhoneNumber']}</span>
+
                     <label><h5>Confirm Password</h5>
-                        <input style={InputTextBox} type="password" autoComplete="on" id="UsrRePassword" name="UsrRePassword" placeholder="Password" value={this.state.UsrRePassword} onChange={this.handleInput} />
+                        <input style={InputTextBox} 
+                        type="password" 
+                        autoComplete="on" 
+                        id="UsrRePassword" 
+                        name="UsrRePassword" 
+                        placeholder="Password" 
+                        value={this.state.UsrRePassword} 
+                        onChange={this.handleInput} />
                     </label>      
+                    <span style={{ color: "red" }}>{this.state.errors['UsrPhoneNumber']}</span>
                 </div>          
             </div>
 

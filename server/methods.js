@@ -1,4 +1,3 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -44,5 +43,6 @@ app.post('/adduser', (err, res) => {
 	res.end();
 
 });	
+
 
 module.exports = app;
